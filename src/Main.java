@@ -13,12 +13,11 @@ public class Main {
 
         Vector2<Integer, Integer>[] scores_trial = new Vector2[nTrials];
         Lemmings lm = new Lemmings();
-
         for (int i = 0 ; i < nTrials ; i++){
-            Vector2<String, Integer>[][] lemming_trial = new Vector2[nTrials][DIMENSIONS];
-            int nLemmings = Integer.parseInt(in.readLine());
+            Vector2<String, Integer>[][] lemming_trial = new Vector2[nTrials][DIMENSIONS]; // TODO isto nao devia ser ao contrario? [linha][coluna]?
+            int nLemmings = Integer.parseInt(in.readLine()); // Numero de lemmings por linha
 
-            for (int d = 0 ; d < DIMENSIONS ; d++) {
+            for (int d = 0 ; d < DIMENSIONS ; d++) { // Poder e tribo de um lemming
                 for (int j = 0; j < nLemmings; j++) {
                     String[] line = in.readLine().split(" ");
                     String type = line[0];
