@@ -31,18 +31,20 @@ public class Main {
                 }
             }
             //Solve sub-problem
-            lm.createTable();
-            scores_trial[i] = lm.solve();
+
+
             System.out.println("--------------");
             lm.printLemmings();
             System.out.println("--------------");
+            lm.createTable();
+            scores_trial[i] = lm.solve();
             lm.printTable();
             System.out.println("--------------");
         }
 
         for (int i = 0 ; i < scores_trial.length ; i++){
             Vector2<Integer, Integer> curr = scores_trial[i];
-            System.out.println(curr.getFirst() + " " + curr.getSecond());
+            System.out.println(curr.toString());
         }
 
         in.close();
