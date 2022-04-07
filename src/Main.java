@@ -21,14 +21,16 @@ public class Main {
         for (int i = 0 ; i < nTrials ; i++){
             int nLemmings;
             lm = new Lemmings(DIMENSIONS);
+
             for (int d = 0 ; d < DIMENSIONS ; d++) { // Poder e tribo de um lemming
                 nLemmings = Integer.parseInt(in.readLine()); // Numero de lemmings por linha
+                Vector2<String, Long>[] lemmings = new Vector2[nLemmings];
                 for (int l = 0; l < nLemmings ; l++) {
                     String[] line = in.readLine().split(" ");
                     String type = line[0];
-                    long points = Integer.parseInt(line[1]);
-                    Vector2<String, Long> lemming = new Vector2<>(type, points);
-                    lm.build(d, lemming);
+                    long points = Long.parseLong(line[1]);
+                    lemmings[l] = new Vector2<>(type, points);
+                    lm.build(d, lemmings);
                 }
             }
             //Solve sub-problem
@@ -38,7 +40,7 @@ public class Main {
             lm.createTable();
             out.write(lm.solve().toString());
             out.newLine();
-           /* lm.printTable();
+            /*lm.printTable();
             System.out.println("--------------");*/
         }
         Timestamp late = new Timestamp(System.currentTimeMillis());
@@ -48,7 +50,7 @@ public class Main {
         }*/
 
         out.newLine();
-        out.write(String.valueOf(late.getNanos()-now.getNanos()));
+        out.write(String.valueOf(late.getTime()-now.getTime()));
         in.close();
         out.close();
     }

@@ -5,34 +5,33 @@ import java.util.*;
 public class Lemmings {
 
     //TODO Find a better data structure to get/find specific elements
-    private List<Vector2<String, Long>>[] lemming; // <Tribo do Lemming , Poder do Lemming >
+    private Vector2<String, Long>[][] lemming; // <Tribo do Lemming , Poder do Lemming >
     private Vector2<Long, Long>[][] table; //Solving problem table
 
     public Lemmings(int dimensions){
-        this.lemming = new LinkedList[dimensions];
-        for (int d = 0 ; d < dimensions ; d++){
+        this.lemming = new Vector2[dimensions][];
+        /*for (int d = 0 ; d < dimensions ; d++){
             this.lemming[d] = new LinkedList<>();
-        }
+        }*/
     }
 
-    public void build(int dimension, Vector2<String, Long> given_lemming){
-        this.lemming[dimension].add(given_lemming);
+    public void build(int dimension, Vector2<String, Long>[] given_lemming){
+        this.lemming[dimension] = given_lemming;
     }
 
     /**
      * Creates a new solving table
      */
     public void createTable(){
-        this.table = new Vector2[lemming[1].size()+1][lemming[0].size()+1];
-        for (int l1 = 0 ; l1 <= this.lemming[1].size() ; l1++){
-            for (int l2 = 0 ; l2 <= this.lemming[0].size() ; l2++){
-                this.table[l1][l2] = new Vector2<Long,Long>((long) -1, (long) -1);
+        int lines = lemming[1] != null ? lemming[1].length+1 : 1;
+        int rows = lemming[0] != null ? lemming[0].length+1 : 1;
+        this.table = new Vector2[rows][lines];
+        for (int l1 = 0 ; l1 < table[0].length; l1++){
+            for (int l2 = 1 ; l2 < table.length; l2++){
+                this.table[l2][l1] = new Vector2<>(0L, 0L);
             }
         }
     }
-
-    //
-
 
     /**
      * Solves this problem returning a pair that contains the maximum possible points with minimum number of pairs
@@ -43,21 +42,20 @@ public class Lemmings {
         Vector2<Long, Long> base = new Vector2<>(0L, 0L);
         Vector2<Long, Long> res = base;
         //First Line
-        for (int l1 = 0 ; l1 < table[0].length ; l1++){
+        for (int l1 = 0 ; l1 < table[0].length; l1++){
             table[0][l1] = base;
         }
 
         //First Column
-        for (int l2 = 1 ; l2 < table.length ; l2++){
+        for (int l2 = 1 ; l2 < table.length; l2++){
             table[l2][0] = base;
         }
 
         //General cases
-        for (int l1 = 1 ; l1 < table[0].length ; l1++){
-            for (int l2 = 1 ; l2 < table.length ; l2++){
-                //TODO Terrible time complexity of finding both lemmings
-                Vector2<String, Long> lemming1 = this.lemming[0].get(l1-1);
-                Vector2<String, Long> lemming2 = this.lemming[1].get(l2-1);
+        for (int l1 = 1 ; l1 < table[0].length; l1++){
+            for (int l2 = 1 ; l2 < table.length; l2++){
+                Vector2<String, Long> lemming1 = this.lemming[1][l1-1];
+                Vector2<String, Long> lemming2 = this.lemming[0][l2-1];
                 String lemming1_type = lemming1.getFirst();
                 String lemming2_type = lemming2.getFirst();
                 long lemming1_score = lemming1.getSecond();
@@ -135,8 +133,10 @@ public class Lemmings {
     //TODO Remove this later
     public void printLemmings(){
         for (int d = 0 ; d < Main.DIMENSIONS ; d++){
-            for (Vector2<String, Long> curr : lemming[d]) {
-                System.out.print(curr.toString());
+            if (lemming[d] != null) {
+                for (Vector2<String, Long> curr : lemming[d]) {
+                    System.out.print(curr.toString());
+                }
             }
             System.out.println();
         }
