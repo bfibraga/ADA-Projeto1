@@ -48,6 +48,6 @@ public class Vector2<X, Y> {
     }
 
     public String toString(){
-        return "(" + this.getFirst() + "," + this.getSecond() + ")";
+        return this.getFirst() + " " + this.getSecond();
     }
 }

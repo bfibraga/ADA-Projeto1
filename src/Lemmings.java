@@ -40,7 +40,7 @@ public class Lemmings {
      */
     public Vector2<Long,Long> solve() {
         //Base case
-        Vector2<Long, Long> base = new Vector2<Long, Long>(0L, 0L);
+        Vector2<Long, Long> base = new Vector2<>(0L, 0L);
         Vector2<Long, Long> res = base;
         //First Line
         for (int l1 = 0 ; l1 < table[0].length ; l1++){
@@ -53,9 +53,6 @@ public class Lemmings {
         }
 
         //General cases
-        //1: Fall lemming of l1
-        //2: Fall lemming of l2
-        //3: Fall both lemmings if both are equals
         for (int l1 = 1 ; l1 < table[0].length ; l1++){
             for (int l2 = 1 ; l2 < table.length ; l2++){
                 //TODO Terrible time complexity of finding both lemmings
@@ -67,35 +64,27 @@ public class Lemmings {
                 long lemming2_score = lemming2.getSecond();
                 boolean same_type = lemming1_type.equals(lemming2_type);
 
-                //TODO Merge scores with number of pairs
-                //Score
-                /*
-                long one_fall_score = Math.max(this.table[l2-1][l1].getFirst(), this.table[l2][l1-1].getFirst());
-                long both_fall_score = Math.max(one_fall_score, this.table[l2-1][l1-1].getFirst() + lemming1_score + lemming2_score);
-                long final_res_score = same_type ?
-                        Math.max(one_fall_score, this.table[l2-1][l1-1].getFirst() + lemming1_score + lemming2_score) : //Fall both lemmings if both are equals
-                        one_fall_score; //Fall one lemming
-
-
-                //Number Pair formed
-                long one_fall_pair = Math.max(this.table[l2-1][l1].getSecond(), this.table[l2][l1-1].getSecond());
-                long final_res_pair = same_type ?
-                        Math.max(one_fall_pair, this.table[l2-1][l1-1].getSecond()+1) : //Fall both lemmings if both are equals
-                        one_fall_pair; //Fall one lemming
-
-
-                table[l2][l1] = new Vector2<>(final_res_score, final_res_pair);
-                */
+                //Best case
+                //1: Fall lemming of l1
+                //2: Fall lemming of l2
+                //3: Fall both lemmings if both are equals
                 table[l2][l1] = same_type ?
                         this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], lemming1_score + lemming2_score) :
                         this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], null, 0L);
 
-                //TODO Finding best candidate
-                /*long best_score = res.getFirst();
+                //Finding the best candidate
+                //1: Score is greater than the current result
+                //2: If Score is equal
+                //  - Number pair is lesser than the current result
+                long best_score = res.getFirst();
                 long best_nmr_pair = res.getSecond();
-                if (final_res_score > best_score || final_res_pair < best_nmr_pair){
+                if (table[l2][l1].getFirst() > best_score){
                     res = table[l2][l1];
-                }*/
+                } else {
+                    if (table[l2][l1].getFirst() == best_score && table[l2][l1].getSecond() < best_nmr_pair) {
+                        res = table[l2][l1];
+                    }
+                }
             }
         }
 
@@ -119,15 +108,15 @@ public class Lemmings {
     }
 
     /**
-     *
+     * Finds the best option between falling the lemming of first line, second line or both if are the same type
      * @param line_fall
      * @param column_fall
      * @param both_fall
-     * @param both_score
+     * @param bonus_score
      * @return
      */
-    private Vector2<Long, Long> bestOption(Vector2<Long, Long> line_fall, Vector2<Long, Long> column_fall, Vector2<Long, Long> both_fall, long both_score) {
-        Vector2<Long, Long> res = new Vector2<>(0L, 0L);
+    private Vector2<Long, Long> bestOption(Vector2<Long, Long> line_fall, Vector2<Long, Long> column_fall, Vector2<Long, Long> both_fall, long bonus_score) {
+        Vector2<Long, Long> res;
 
         if (line_fall.getFirst() >= column_fall.getFirst()){
             res = line_fall;
@@ -136,13 +125,14 @@ public class Lemmings {
         }
 
         if (both_fall != null && both_fall.getFirst() >= res.getFirst()){
-            res = new Vector2<>(both_fall.getFirst() + both_score, both_fall.getSecond() + 1L );
+            res = new Vector2<>(both_fall.getFirst() + bonus_score, both_fall.getSecond() + 1L );
         }
 
         return res;
     }
 
     //DEBUG
+    //TODO Remove this later
     public void printLemmings(){
         for (int d = 0 ; d < Main.DIMENSIONS ; d++){
             for (Vector2<String, Long> curr : lemming[d]) {
@@ -153,6 +143,7 @@ public class Lemmings {
     }
 
     //DEBUG
+    //TODO Remove this later
     public void printTable(){
         System.out.print("  ");
 

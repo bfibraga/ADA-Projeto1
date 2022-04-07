@@ -30,18 +30,18 @@ public class Main {
                 }
             }
             //Solve sub-problem
-            System.out.println("--------------");
+            /*System.out.println("--------------");
             lm.printLemmings();
-            System.out.println("--------------");
+            System.out.println("--------------");*/
             lm.createTable();
             scores_trial[i] = lm.solve();
-            lm.printTable();
+            /*lm.printTable();
             System.out.println("--------------");
-            System.out.println(scores_trial[i].toString());
+            System.out.println(scores_trial[i].toString());*/
         }
 
         for (Vector2<Long, Long> curr : scores_trial) {
-            System.out.println(curr.getFirst() + " " + curr.getSecond());
+            System.out.println(curr.toString());
         }
 
         in.close();
