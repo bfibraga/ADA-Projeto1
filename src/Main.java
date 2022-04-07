@@ -14,25 +14,22 @@ public class Main {
 
         int nTrials = Integer.parseInt(in.readLine());
 
-        Vector2<Integer, Integer>[] scores_trial = new Vector2[nTrials];
+        Vector2<Long, Long>[] scores_trial = new Vector2[nTrials];
         Lemmings lm;
         for (int i = 0 ; i < nTrials ; i++){
+            int nLemmings;
             lm = new Lemmings(DIMENSIONS);
-            int[] lemming_length = new int[DIMENSIONS];
-            Set<Vector2<Vector2, Vector2>> lemmings = new HashSet<>();
             for (int d = 0 ; d < DIMENSIONS ; d++) { // Poder e tribo de um lemming
-                lemming_length[d] = Integer.parseInt(in.readLine()); // Numero de lemmings por linha
-                for (int l = 0; l < lemming_length[d] ; l++) {
+                nLemmings = Integer.parseInt(in.readLine()); // Numero de lemmings por linha
+                for (int l = 0; l < nLemmings ; l++) {
                     String[] line = in.readLine().split(" ");
                     String type = line[0];
-                    int points = Integer.parseInt(line[1]);
-                    Vector2<String, Integer> lemming = new Vector2<>(type, points);
+                    long points = Integer.parseInt(line[1]);
+                    Vector2<String, Long> lemming = new Vector2<String, Long>(type, points);
                     lm.build(d, lemming);
                 }
             }
             //Solve sub-problem
-
-
             System.out.println("--------------");
             lm.printLemmings();
             System.out.println("--------------");
@@ -40,11 +37,11 @@ public class Main {
             scores_trial[i] = lm.solve();
             lm.printTable();
             System.out.println("--------------");
+            System.out.println(scores_trial[i].toString());
         }
 
-        for (int i = 0 ; i < scores_trial.length ; i++){
-            Vector2<Integer, Integer> curr = scores_trial[i];
-            System.out.println(curr.toString());
+        for (Vector2<Long, Long> curr : scores_trial) {
+            System.out.println(curr.getFirst() + " " + curr.getSecond());
         }
 
         in.close();
