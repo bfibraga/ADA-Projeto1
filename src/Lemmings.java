@@ -4,15 +4,11 @@ import java.util.*;
 
 public class Lemmings {
 
-    //TODO Find a better data structure to get/find specific elements
     private Vector2<String, Long>[][] lemming; // <Tribo do Lemming , Poder do Lemming >
     private Vector2<Long, Long>[][] table; //Solving problem table
 
     public Lemmings(int dimensions){
         this.lemming = new Vector2[dimensions][];
-        /*for (int d = 0 ; d < dimensions ; d++){
-            this.lemming[d] = new LinkedList<>();
-        }*/
     }
 
     public void build(int dimension, Vector2<String, Long>[] given_lemming){
@@ -101,7 +97,6 @@ public class Lemmings {
         }
         Vector2 <Integer, Integer> output = new Vector2<>(res, nPairs);*/
 
-        //table[lemming[1].size()][lemming[0].size()]
         return res;
     }
 
