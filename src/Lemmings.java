@@ -78,7 +78,7 @@ public class Lemmings {
                 //  - Number pair is lesser than the current result
                 long best_score = res.getFirst();
                 long best_nmr_pair = res.getSecond();
-                if (table[l2][l1].getFirst() > best_score){
+                if (table[l2][l1].getFirst() > best_score) {
                     res = table[l2][l1];
                 } else {
                     if (table[l2][l1].getFirst() == best_score && table[l2][l1].getSecond() < best_nmr_pair) {

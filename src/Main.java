@@ -1,8 +1,8 @@
 import utils.Vector2;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +10,9 @@ public class Main {
     public static final int DIMENSIONS = 2;
 
     public static void main(String[] args) throws IOException {
+        Timestamp now = new Timestamp(System.currentTimeMillis());
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int nTrials = Integer.parseInt(in.readLine());
 
@@ -25,7 +27,7 @@ public class Main {
                     String[] line = in.readLine().split(" ");
                     String type = line[0];
                     long points = Integer.parseInt(line[1]);
-                    Vector2<String, Long> lemming = new Vector2<String, Long>(type, points);
+                    Vector2<String, Long> lemming = new Vector2<>(type, points);
                     lm.build(d, lemming);
                 }
             }
@@ -34,16 +36,20 @@ public class Main {
             lm.printLemmings();
             System.out.println("--------------");*/
             lm.createTable();
-            scores_trial[i] = lm.solve();
-            /*lm.printTable();
-            System.out.println("--------------");
-            System.out.println(scores_trial[i].toString());*/
+            out.write(lm.solve().toString());
+            out.newLine();
+           /* lm.printTable();
+            System.out.println("--------------");*/
         }
+        Timestamp late = new Timestamp(System.currentTimeMillis());
 
-        for (Vector2<Long, Long> curr : scores_trial) {
+        /*for (Vector2<Long, Long> curr : scores_trial) {
             System.out.println(curr.toString());
-        }
+        }*/
 
+        out.newLine();
+        out.write(String.valueOf(late.getNanos()-now.getNanos()));
         in.close();
+        out.close();
     }
 }
