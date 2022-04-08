@@ -1,12 +1,12 @@
 import utils.Vector2;
 
-import java.util.*;
 
 public class Lemmings {
 
     private Vector2<String, Long>[][] lemming; // <Tribo do Lemming , Poder do Lemming >
     private Vector2<Long, Long>[][] table; //Solving problem table
 
+    @SuppressWarnings("unchecked")
     public Lemmings(int dimensions){
         this.lemming = new Vector2[dimensions][];
     }
@@ -18,6 +18,7 @@ public class Lemmings {
     /**
      * Creates a new solving table
      */
+    @SuppressWarnings("unchecked")
     public void createTable(){
         int lines = lemming[1] != null ? lemming[1].length+1 : 1;
         int rows = lemming[0] != null ? lemming[0].length+1 : 1;

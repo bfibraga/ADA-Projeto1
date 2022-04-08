@@ -17,6 +17,7 @@ public class Main {
 
             for (int d = 0 ; d < DIMENSIONS ; d++) { // Poder e tribo de um lemming
                 nLemmings = Integer.parseInt(in.readLine()); // Numero de lemmings por linha
+                @SuppressWarnings("unchecked")
                 Vector2<String, Long>[] lemmings = new Vector2[nLemmings];
                 for (int l = 0; l < nLemmings ; l++) {
                     String[] line = in.readLine().split(" ");
