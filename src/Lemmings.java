@@ -1,5 +1,7 @@
 import utils.Vector2;
 
+import java.util.function.LongFunction;
+
 
 public class Lemmings {
 
@@ -54,13 +56,14 @@ public class Lemmings {
                 long lemming2_score = lemming2.getSecond();
                 boolean same_type = lemming1_type.equals(lemming2_type);
 
+                //TODO Fixing
                 //Best case
                 //1: Fall lemming of l1
                 //2: Fall lemming of l2
                 //3: Fall both lemmings if both are equals
                 table[l2][l1] = same_type ?
-                        this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], lemming1_score + lemming2_score) :
-                        this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], 0L);
+                        this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], lemming1_score+lemming2_score) :
+                        this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], null, 0L);
 
                 //TODO Fixing
                 //Finding the best candidate
@@ -114,8 +117,8 @@ public class Lemmings {
             res = column_fall;
         }
 
-        if (both_fall != null && both_fall.getFirst() >= res.getFirst()){
-            res = new Vector2<>(both_fall.getFirst() + bonus_score, both_fall.getSecond() + 1L );
+        if (both_fall != null && (both_fall.getFirst()+bonus_score) >= res.getFirst()){
+            res = new Vector2<>(both_fall.getFirst()+bonus_score, both_fall.getSecond() + 1L );
         }
 
         return res;

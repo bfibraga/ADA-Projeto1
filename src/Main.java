@@ -30,13 +30,13 @@ public class Main {
             //Solve sub-problem
             lm.createTable();
 
-            /*System.out.println("--------");
+            System.out.println("--------");
             lm.printLemmings();
-            System.out.println("--------");*/
+            System.out.println("--------");
             System.out.println(lm.solve().toString());
-            /*System.out.println("--------");
+            System.out.println("--------");
             lm.printTable();
-            System.out.println("--------");*/
+            System.out.println("--------");
 
         }
 
