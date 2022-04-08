@@ -23,11 +23,11 @@ public class Lemmings {
         int lines = lemming[1] != null ? lemming[1].length+1 : 1;
         int rows = lemming[0] != null ? lemming[0].length+1 : 1;
         this.table = new Vector2[rows][lines];
-        for (int l1 = 0 ; l1 < table[0].length; l1++){
+        /*for (int l1 = 0 ; l1 < table[0].length; l1++){
             for (int l2 = 1 ; l2 < table.length; l2++){
                 this.table[l2][l1] = new Vector2<>(0L, 0L);
             }
-        }
+        }*/
     }
 
     /**

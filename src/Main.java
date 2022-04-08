@@ -6,14 +6,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int nTrials = Integer.parseInt(in.readLine());
 
-        Lemmings lm;
+        Lemmings lm = new Lemmings(DIMENSIONS);
         for (int i = 0 ; i < nTrials ; i++){
             int nLemmings;
-            lm = new Lemmings(DIMENSIONS);
 
             for (int d = 0 ; d < DIMENSIONS ; d++) { // Poder e tribo de um lemming
                 nLemmings = Integer.parseInt(in.readLine()); // Numero de lemmings por linha
@@ -24,17 +22,15 @@ public class Main {
                     String type = line[0];
                     long points = Long.parseLong(line[1]);
                     lemmings[l] = new Vector2<>(type, points);
-                    lm.build(d, lemmings);
                 }
+                lm.build(d, lemmings);
             }
 
             //Solve sub-problem
             lm.createTable();
-            out.write(lm.solve().toString());
-            out.newLine();
+            System.out.println(lm.solve().toString());
         }
 
         in.close();
-        out.close();
     }
 }
