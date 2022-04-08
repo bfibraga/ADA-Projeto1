@@ -23,11 +23,6 @@ public class Lemmings {
         int lines = lemming[1] != null ? lemming[1].length+1 : 1;
         int rows = lemming[0] != null ? lemming[0].length+1 : 1;
         this.table = new Vector2[rows][lines];
-        /*for (int l1 = 0 ; l1 < table[0].length; l1++){
-            for (int l2 = 1 ; l2 < table.length; l2++){
-                this.table[l2][l1] = new Vector2<>(0L, 0L);
-            }
-        }*/
     }
 
     /**
@@ -67,6 +62,7 @@ public class Lemmings {
                         this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], lemming1_score + lemming2_score) :
                         this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], 0L);
 
+                //TODO Fixing
                 //Finding the best candidate
                 //1: Score is greater than the current result
                 //2: If Score is equal
@@ -149,9 +145,9 @@ public class Lemmings {
             System.out.print("  ");
         }
         System.out.println();
-        for (int l2 = 0; l2 < table.length ; l2++) {
+        for (int l2 = 0 ; l2 < table.length; l2++){
             System.out.print(l2 + " ");
-            for (int l1 = 0 ; l1 < table[0].length ; l1++) {
+            for (int l1 = 0 ; l1 < table[0].length; l1++){
                 Vector2<Long, Long> curr = table[l2][l1];
                 System.out.print(curr.toString());
             }
