@@ -65,7 +65,7 @@ public class Lemmings {
                 //3: Fall both lemmings if both are equals
                 table[l2][l1] = same_type ?
                         this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], lemming1_score + lemming2_score) :
-                        this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], null, 0L);
+                        this.bestOption(this.table[l2-1][l1], this.table[l2][l1-1], this.table[l2-1][l1-1], 0L);
 
                 //Finding the best candidate
                 //1: Score is greater than the current result

@@ -7,10 +7,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-        int nTrials = Integer.parseInt(in.readLine());
-        StringBuilder res = new StringBuilder();
+        long nTrials = Long.parseLong(in.readLine());
+        StringBuilder result = new StringBuilder();
         Lemmings lm = new Lemmings(DIMENSIONS);
-        for (int i = 0 ; i < nTrials ; i++){
+        for (long i = 0L ; i < nTrials ; i++){
             int nLemmings;
 
             for (int d = 0 ; d < DIMENSIONS ; d++) { // Poder e tribo de um lemming
@@ -28,9 +28,9 @@ public class Main {
 
             //Solve sub-problem
             lm.createTable();
-            res.append(lm.solve().toString()).append("\n");
+            result.append(lm.solve().toString()).append("\n");
         }
-        System.out.print(res);
+        System.out.print(result);
         in.close();
     }
 }
