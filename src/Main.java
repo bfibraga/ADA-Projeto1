@@ -8,7 +8,7 @@ public class Main {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
         int nTrials = Integer.parseInt(in.readLine());
-
+        StringBuilder res = new StringBuilder();
         Lemmings lm = new Lemmings(DIMENSIONS);
         for (int i = 0 ; i < nTrials ; i++){
             int nLemmings;
@@ -28,9 +28,9 @@ public class Main {
 
             //Solve sub-problem
             lm.createTable();
-            System.out.println(lm.solve().toString());
+            res.append(lm.solve().toString()).append("\n");
         }
-
+        System.out.print(res);
         in.close();
     }
 }
