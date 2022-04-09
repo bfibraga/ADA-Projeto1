@@ -1,6 +1,11 @@
 import utils.Vector2;
 import java.io.*;
 
+/**
+ * Main class
+ * @author Bruno Braga 57747
+ * @author Goncalo Prata 52912
+ */
 public class Main {
     public static final int DIMENSIONS = 2;
 
@@ -26,18 +31,9 @@ public class Main {
                 lm.build(d, lemmings);
             }
 
-
             //Solve sub-problem
             lm.createTable();
-
-            System.out.println("--------");
-            lm.printLemmings();
-            System.out.println("--------");
             System.out.println(lm.solve().toString());
-            System.out.println("--------");
-            lm.printTable();
-            System.out.println("--------");
-
         }
 
         in.close();

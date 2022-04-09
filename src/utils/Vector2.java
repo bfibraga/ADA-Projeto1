@@ -3,8 +3,8 @@ package utils;
 /**
  * @author Bruno Braga 57747
  * @author Goncalo Prata 52912
- * @param <X>
- * @param <Y>
+ * @param <X> First component's generic type
+ * @param <Y> Second component's generic type
  */
 public class Vector2<X, Y> {
     private X first;
@@ -29,22 +29,6 @@ public class Vector2<X, Y> {
      */
     public Y getSecond(){
         return second;
-    }
-
-    /**
-     * Sets first component of this vector with new value
-     * @param new_first - New value for the first component
-     */
-    public void setFirst(X new_first) {
-        this.first = new_first;
-    }
-
-    /**
-     * Sets second component of this vector with new value
-     * @param new_second - New value for the second component
-     */
-    public void setSecond(Y new_second) {
-        this.second = new_second;
     }
 
     public String toString(){
